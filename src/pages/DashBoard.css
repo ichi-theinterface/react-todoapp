@@ -1,3 +1,46 @@
-.header {
-    color: red;
+.dashboard-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.todolist-container {
+    width: 60%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.todolist-header {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.todolist-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.task h3 {
+    margin-top: 0;
+    color: #2a2a2a;
+}
+
+.task p {
+    margin: 5px 0 0;
+    color: #4a4a4a;
 }

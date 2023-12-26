@@ -1,0 +1,33 @@
+.signin-container {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .signin-form {
+    margin: 20px auto;
+    max-width: 300px;
+  }
+  
+  .signin-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .signin-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .signin-form button:hover {
+    background-color: #0056b3;
+  }
+  
