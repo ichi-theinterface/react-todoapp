@@ -1,10 +1,27 @@
 .dashboard-frame {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Align children vertically */
     align-items: center;
     min-height: 100vh;
     background-color: #f4f4f4;
     padding: 20px;
+}
+
+.dashboard-heaer-frame {
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.dashboard-heaer-date {
+    background-color: #f4f4f4; /* Blue background for the header */
+    color: black; /* White text color */
+}
+
+.dashboard-heaer-add-task-button {
+    background-color: #f4f4f4;
 }
 
 .todolist-container {
