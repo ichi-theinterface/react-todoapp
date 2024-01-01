@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
-import './CreateTaskModal.css'
+import './EditTaskModal.css'
 
-const CreateTaskModal = ({ isOpen, onClose }) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+const EditTaskModal = ({ isOpen, onClose, task }) => {
+    const [editingtitle, setEditingtitle] = useState(task.title);
+    const [editingdescription, setEditingDescription] = useState(task.description);
     
-    const handleCreate = () => {
-        if (!title.trim()) {
+    const handleEdit = () => {
+        if (!editingtitle.trim()) {
           alert("Error: Title cannot be empty.");
-          return; // Stop the function execution if title is empty
-        } else if (!description.trim()) {
+          return;
+        } else if (!editingdescription.trim()) {
           alert("Error: Description cannot be empty.");
-          return; // Stop the function execution if description is empty
+          return;
         }
 
         // Prepare the task data
         const taskData = {
-            title: title,
-            description: description,
+            id: task.id,
+            title: editingtitle,
+            description: editingdescription,
         };
 
-        console.log("Creating task with Title:", title, "Description:", description);
-
-        // Post the task to Django
-        fetch('http://localhost/api/tasks/', {
-            method: 'POST',
+        // Update the selected task to Django
+        fetch(`http://localhost/api/tasks/${task.id}/`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 // authorization information can be added here.
@@ -33,7 +32,6 @@ const CreateTaskModal = ({ isOpen, onClose }) => {
         })
         .then(response => {
             if (!response.ok) {
-                // Handle response errors
                 throw new Error('Network response was not ok');
             }
             return response.json();
@@ -41,16 +39,16 @@ const CreateTaskModal = ({ isOpen, onClose }) => {
         .then(data => {
             console.log('Task created successfully:', data);
             // Reset the form fields
-            setTitle('');
-            setDescription('');
+            setEditingtitle('');
+            setEditingDescription('');
             onClose(); // Close modal after task creation
         })
         .catch(error => {
             console.error('Error creating task:', error);
         }); 
 
-        setTitle('');
-        setDescription('');
+        setEditingtitle('');
+        setEditingDescription('');
         onClose(); // Close modal after task creation
     };
     
@@ -59,24 +57,24 @@ const CreateTaskModal = ({ isOpen, onClose }) => {
     return (
       <div className="modal-CreateTask-overlay">
         <div className="modal-CreateTask">
-          <h2>Create Task</h2>
+          <h2>Edit Task</h2>
           <div className="content">
             <label>
               Title:
-              <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
+              <input type="text" value={editingtitle} onChange={e => setEditingtitle(e.target.value)} />
             </label>
             <label>
               Description:
-              <textarea value={description} onChange={e => setDescription(e.target.value)} />
+              <textarea value={editingdescription} onChange={e => setEditingDescription(e.target.value)} />
             </label>
           </div>
           <div className="actions">
             <button onClick={onClose}>Close</button>
-            <button onClick={handleCreate}>Create</button>
+            <button onClick={handleEdit}>Update</button>
           </div>
         </div>
       </div>
     );
 };
 
-export default CreateTaskModal;
+export default EditTaskModal;

@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import "./DashBoard.css";
-import Header from "../components/Header"
+import Header from "../components/Header";
+import ToDoList from '../components/ToDoList';
 import CreateTaskModal from '../components/CreateTaskModal';
 
 function DashBoard() {
-  // Assuming tasks are stored as an array of objects
+  // Tasks are stored as an array of objects
   const [tasks, setTasks] = useState([]);
-
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const toggleModal = () => {
-    setModalOpen(!isModalOpen);
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1/api/tasks/?format=json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setTasks(data); // Update tasks state with fetched data
+    } catch (error) {
+      console.error("Failed to fetch tasks:", error);
+    }
   };
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1/api/tasks/?format=json');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setTasks(data); // Assuming the response is the array of tasks
-      } catch (error) {
-        console.error("Failed to fetch tasks:", error);
-      }
-    };
-
     fetchTasks();
   }, []);
+
+  const toggleModal = () => {
+    const isClosingModal = isModalOpen; // Check if modal is currently open
+    setModalOpen(!isModalOpen); // Toggle the modal state
+
+    if (isClosingModal) {
+      fetchTasks(); // Fetch tasks only if the modal is being closed
+    }
+  };
 
 
   return (
@@ -37,24 +42,12 @@ function DashBoard() {
         <div className="dashboard-frame">
           <div className='dashboard-heaer-frame'>
             <h1 className='dashboard-heaer-date'>Today's Date: {new Date().toLocaleDateString()}</h1>
-            <button className='dashboard-heaer-add-task-button' onClick={toggleModal}>Add Task</button>
+            <button className='dashboard-heaer-add-task-button' onClick={toggleModal}>Create Task</button>
             <CreateTaskModal isOpen={isModalOpen} onClose={toggleModal} />
           </div>
           <div className='todolist-container'>
-              <h1 className="todolist-header">List of To-Do</h1>
-              <div className="todolist-content">
-                {tasks.length === 0 ? (
-                  <p>No tasks to show</p>
-                ) : (
-                  tasks.map((task, index) => (
-                    <div key={index} className="task">
-                      <h3>{task.title}</h3>
-                      <p>{task.description}</p>
-                      {/* add more task details here */}
-                    </div>
-                  ))
-                )}
-              </div>
+            <h1 className="todolist-header">List of To-Do</h1>
+            <ToDoList tasks={tasks} onModalClose={fetchTasks} />
           </div>
         </div>
     </div>
