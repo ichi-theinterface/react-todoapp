@@ -19,3 +19,18 @@
     margin: 0;
     color: #2a2a2a;
 }
+
+.todolist-card button {
+    border: 0;
+    background: #78f89f;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .todolist-card button:hover {
+    background-color: #66e07d;
+  }

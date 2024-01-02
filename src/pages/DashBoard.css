@@ -21,8 +21,19 @@
 }
 
 .dashboard-heaer-add-task-button {
-    background-color: #f4f4f4;
+    border: 0;
+    background: #78f89f;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+.dashboard-heaer-add-task-button:hover {
+    background-color: #66e07d;
+  }
 
 .todolist-container {
     width: 60%;
@@ -33,8 +44,37 @@
 }
 
 .todolist-header {
+    width: 100%;
     color: #333;
     font-size: 1.5em;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
 }
+
+.login-prompt {
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.login-prompt h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.login-prompt p {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #555;
+}
+
+.login-prompt a {
+  color: #0066ff;
+  text-decoration: none;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}
+  
