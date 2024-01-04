@@ -4,46 +4,47 @@ import './CreateTaskModal.css'
 const CreateTaskModal = ({ isOpen, onClose }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [group, setGroup] = useState('');
     
     const handleCreate = () => {
         if (!title.trim()) {
           alert("Error: Title cannot be empty.");
-          return; // Stop the function execution if title is empty
+          return;
         } else if (!description.trim()) {
           alert("Error: Description cannot be empty.");
-          return; // Stop the function execution if description is empty
+          return;
         }
 
-        // Prepare the task data
         const taskData = {
             title: title,
             description: description,
+            group: group,
         };
 
         console.log("Creating task with Title:", title, "Description:", description);
-
-        // Post the task to Django
+        
+        // make sure this functtion trigger the call back function to update the state of tasks upon execution.
         fetch('http://localhost/api/tasks/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // authorization information can be added here.
+                'Authorization': `Token ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(taskData),
         })
         .then(response => {
             if (!response.ok) {
-                // Handle response errors
+                // need to add more error handing.
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then(data => {
             console.log('Task created successfully:', data);
-            // Reset the form fields
             setTitle('');
             setDescription('');
-            onClose(); // Close modal after task creation
+            setGroup('');
+            onClose();
         })
         .catch(error => {
             console.error('Error creating task:', error);
@@ -51,7 +52,8 @@ const CreateTaskModal = ({ isOpen, onClose }) => {
 
         setTitle('');
         setDescription('');
-        onClose(); // Close modal after task creation
+        setGroup('');
+        onClose();
     };
     
     if (!isOpen) return null;
@@ -68,6 +70,10 @@ const CreateTaskModal = ({ isOpen, onClose }) => {
             <label>
               Description:
               <textarea value={description} onChange={e => setDescription(e.target.value)} />
+            </label>
+            <label>
+              Task Group:
+              <input type="text" value={group} onChange={e => setGroup(e.target.value)} />
             </label>
           </div>
           <div className="actions">

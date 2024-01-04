@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import EditTaskModal from './EditTaskModal';
-import CreateTaskModal from './CreateTaskModal';
 import "./ToDoList.css";
 
 const ToDoList = ({ tasks, updateTasks, onModalClose }) => {
@@ -23,22 +22,7 @@ const ToDoList = ({ tasks, updateTasks, onModalClose }) => {
     setModalOpen(!isModalOpen); // Toggle the modal state
   };
 
-  const fetchTasks = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1/api/tasks/?format=json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      updateTasks(data); // Use updateTasks here instead of setTasks
-    } catch (error) {
-      console.error("Failed to fetch tasks:", error);
-    }
-  };
-  
-
   const handleDelete = (task) => {
-    // Confirmation before deletion
     if (!window.confirm("Are you sure you want to delete this task?")) {
         return;
     }
@@ -47,7 +31,7 @@ const ToDoList = ({ tasks, updateTasks, onModalClose }) => {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            // authorization information can be added here.
+            'Authorization': `Token ${localStorage.getItem('token')}`
         }
     })
     .then(response => {

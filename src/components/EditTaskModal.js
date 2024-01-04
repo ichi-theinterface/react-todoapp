@@ -27,6 +27,7 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
             headers: {
                 'Content-Type': 'application/json',
                 // authorization information can be added here.
+                'Authorization': `Token ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(taskData),
         })

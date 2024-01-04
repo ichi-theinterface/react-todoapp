@@ -16,15 +16,23 @@ function DashBoard() {
     setIsLoggedIn(!!token);
   }, []);
 
-
+  // make sure this functtion trigger the call back function to update the state of tasks upon execution.
   const fetchTasks = async () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('token')}`
+      },
+    };
+  
     try {
-      const response = await fetch('http://127.0.0.1/api/tasks/?format=json');
+      const response = await fetch('http://127.0.0.1/api/tasks/?format=json', requestOptions);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      setTasks(data); // Update tasks state with fetched data
+      setTasks(data);
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
     }

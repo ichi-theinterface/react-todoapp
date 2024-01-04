@@ -18,6 +18,7 @@
 .todolist-card h3 {
     margin: 0;
     color: #2a2a2a;
+    flex-grow: 8;
 }
 
 .todolist-card button {
@@ -29,8 +30,10 @@
     line-height: 1;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .todolist-card button:hover {
+    flex-grow: 1;
+    margin: 9px;
+}
+
+.todolist-card button:hover {
     background-color: #66e07d;
-  }
+}
