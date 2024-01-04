@@ -1,18 +1,10 @@
 .dashboard-frame {
     display: flex;
-    flex-direction: column; /* Align children vertically */
+    flex-direction: row; /* Align children vertically */
     align-items: center;
     min-height: 100vh;
     background-color: #f4f4f4;
     padding: 20px;
-}
-
-.dashboard-heaer-frame {
-    background-color: #f4f4f4;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
 }
 
 .dashboard-heaer-date {
@@ -35,8 +27,39 @@
     background-color: #66e07d;
   }
 
+.taskgroup-container {
+  width: 30%;
+  text-align: center;
+}
+
+.taskgroup-container ul {
+  list-style-type: none; /* Removes the list markers */
+  padding: 0; /* Removes default padding */
+}
+
+.taskgroup-container li {
+  margin-bottom: 10px; /* Adds space between each list item */
+}
+
+.taskgroup-container button {
+  width: 100%; /* Makes the button expand to the full width of its container */
+  padding: 10px 15px; /* Adds padding inside the button */
+  background-color: #007bff; /* Sets a background color */
+  color: white; /* Sets the text color */
+  border: none; /* Removes the border */
+  border-radius: 5px; /* Adds rounded corners */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  text-transform: uppercase; /* Optional: transforms text to uppercase */
+  font-size: 16px; /* Sets the font size */
+}
+
+.taskgroup-container button:hover {
+  background-color: #0056b3; /* Darker shade when hovered */
+}
+
+
 .todolist-container {
-    width: 60%;
+    width: 70%;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;

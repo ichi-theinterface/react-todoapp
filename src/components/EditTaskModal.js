@@ -14,7 +14,6 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
           return;
         }
 
-        // Prepare the task data
         const taskData = {
             id: task.id,
             title: editingtitle,
