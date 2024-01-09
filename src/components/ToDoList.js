@@ -27,7 +27,7 @@ const ToDoList = ({ tasks, updateTasks, onModalClose }) => {
         return;
     }
 
-    fetch(`http://localhost/api/task/${task.id}/delete/`, {
+    fetch(`http://localhost/api/task/delete/${task.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

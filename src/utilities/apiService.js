@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1/auth';
+const BASE_URL = 'http://127.0.0.1/api/auth';
 
 export const login = async (credentials) => {
     const response = await fetch(`${BASE_URL}/login/`, {
@@ -28,5 +28,20 @@ export const signUp = async (userData) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     return response.json();
+};
+
+export const listFolder = async () => {
+  const response = await fetch(`http://127.0.0.1/api/folder/list/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${localStorage.getItem('token')}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return response.json();
 };
   

@@ -1,14 +1,16 @@
 .dashboard-frame {
     display: flex;
     flex-direction: row; /* Align children vertically */
-    align-items: center;
-    min-height: 100vh;
+    /* align-items: flex-start; */
+    align-items: stretch;
+    /* min-height: 100vh; */
+    height: 90vh;
     background-color: #f4f4f4;
     padding: 20px;
+    gap: 10px;
 }
 
 .dashboard-heaer-date {
-    background-color: #f4f4f4; /* Blue background for the header */
     color: black; /* White text color */
 }
 
@@ -28,8 +30,16 @@
   }
 
 .taskgroup-container {
-  width: 30%;
+  width: 25%;
   text-align: center;
+  background-color: #f6f6ea ;
+  padding: 20px;
+
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* height: inherit; Inherit the height from the parent 
+  box-sizing: border-box; */
 }
 
 .taskgroup-container ul {
@@ -41,8 +51,30 @@
   margin-bottom: 10px; /* Adds space between each list item */
 }
 
-.taskgroup-container button {
-  width: 100%; /* Makes the button expand to the full width of its container */
+.taskgroup-addbutton {
+  border: 0;
+  background: #78f89f;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex-grow: 1;
+  margin: 9px;
+}
+
+.taskgroup-addbutton:hover {
+  background-color: #66e07d;
+}
+
+.folder-button {
+  width: 100%;
+  display: flex;
+}
+
+.taskgroup-folderbutton {
+  width: 80%; /* Makes the button expand to the full width of its container */
   padding: 10px 15px; /* Adds padding inside the button */
   background-color: #007bff; /* Sets a background color */
   color: white; /* Sets the text color */
@@ -53,17 +85,30 @@
   font-size: 16px; /* Sets the font size */
 }
 
-.taskgroup-container button:hover {
+.taskgroup-folderbutton:hover {
   background-color: #0056b3; /* Darker shade when hovered */
 }
 
+.taskgroup-deletebutton {
+  width: 20%;
+  padding: 10px 15px; /* Makes padding consistent with the other button */
+  background-color: red;
+  color: white; /* Choose text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
 .todolist-container {
     width: 70%;
-    background-color: #fff;
+    background-color:  #e8f6fa;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* height: inherit;
+    overflow: auto; */
 }
 
 .todolist-header {
